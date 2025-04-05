@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Layout</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        /* ======== Global ======== */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+
+        /* ======== Sidebar left======== */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #3BB09E;
+            position: fixed;
+            padding-top: 1rem;
+            transition: width 0.3s;
+            overflow: hidden;
+        }
+
+            .sidebar.collapsed {
+                width: 70px;
+            }
+
+            .sidebar a {
+                color: white;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                white-space: nowrap;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background-color: #2E8B80;
+                }
+
+            .sidebar i {
+                margin-right: 10px;
+                font-size: 20px;
+            }
+
+            .sidebar.collapsed a span {
+                display: none;
+            }
+
+        /* ======== Menu Toggle Button ======== */
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: #000;
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+            /*width: 100%;*/
+            text-align: left;
+        }
+
+        /* ======== Content Wrapper ======== */
+        /* ======== Topbar ======== */
+        .topbar {
+            height: 56px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* ======== Content Wrapper ======== */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+            .content.collapsed {
+                margin-left: 70px;
+            }
+
+        /* ======== Navigation Top ======== */
+        /* ======== Navigation Hover ======== */
+        .nav-item a:hover {
+            color: #007bff;
+        }
+
+        /* ======== Search Bar ======== */
+        .search-bar {
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            width: 250px;
+        }
+
+        /* ======== Icon Group (Notifications, Settings...) ======== */
+        .icon-group i {
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+            color: #333;
+        }
+
+            .icon-group i:hover {
+                color: #007bff;
+            }
+
+        /* ======== User Avatar ======== */
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navbartop  -->
+    <nav class="navbar navbar-expand-lg px-3 bg-light">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/128/919/919825.png" alt="Logo" class="me-2" width="32">
+                <span>Dashboard</span>
+            </a>
+
+            <!-- Navbar Toggler (Mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Projects Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown">
+                            Projects
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Project A</a></li>
+                            <li><a class="dropdown-item" href="#">Project B</a></li>
+                            <li><a class="dropdown-item" href="#">Project C</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Recently Viewed Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="recentDropdown" role="button" data-bs-toggle="dropdown">
+                            Recently Viewed
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Task 1</a></li>
+                            <li><a class="dropdown-item" href="#">Task 2</a></li>
+                            <li><a class="dropdown-item" href="#">Task 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Search Bar -->
+            <input type="text" class="search-bar me-3" placeholder="Search key">
+
+            <!-- Icon Group -->
+            <div class="icon-group d-flex align-items-center">
+                <!-- Notifications Dropdown -->
+                <div class="dropdown">
+                    <i class="bi bi-bell dropdown-toggle" id="notificationDropdown" role="button" data-bs-toggle="dropdown"></i>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">New comment</a></li>
+                        <li><a class="dropdown-item" href="#">Task updated</a></li>
+                        <li><a class="dropdown-item" href="#">Reminder set</a></li>
+                    </ul>
+                </div>
+
+                <!-- User Dropdown -->
+                <div class="dropdown ms-3">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="User" class="user-avatar dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!--<a href="#" class="menu-toggle" id="toggleBtn"><i class="bi bi-list"></i></a>-->
+        <a href="#"><i class="bi bi-house"></i> <span>Home</span></a>
+        <a href="#"><i class="bi bi-plus-square"></i> <span>Add Issue</span></a>
+        <a href="#"><i class="bi bi-list-task"></i> <span>Issues</span></a>
+        <a href="#"><i class="bi bi-bar-chart"></i> <span>Gantt Chart</span></a>
+        <a href="#"><i class="bi bi-folder"></i> <span>Files</span></a>
+        <a href="#"><i class="bi bi-journal"></i> <span>Wiki</span></a>
+        <a href="#"><i class="bi bi-gear"></i> <span>Settings</span></a>
+    </div>
+
+    <!-- Content -->
+    <div class="content" id="mainContent">
+        <!-- Topbar with menu toggle -->
+        <div class="topbar">
+            <button class="menu-toggle" id="toggleBtn"><i class="bi bi-list"></i></button>
+            <h5 class="ms-3 mb-0">Dashboard</h5>
+        </div>
+
+        <div class="mt-4">
+            <p>Chào mừng bạn đến với trang dashboard có menu thu gọn!</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Toggle Script -->
+    <script>
+        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+            item.addEventListener('mouseenter', function () {
+                let menu = this.querySelector('.dropdown-menu');
+                let toggle = this.querySelector('.dropdown-toggle');
+                menu.classList.add('show');
+                toggle.setAttribute('aria-expanded', 'true');
+            });
+
+            item.addEventListener('mouseleave', function () {
+                let menu = this.querySelector('.dropdown-menu');
+                let toggle = this.querySelector('.dropdown-toggle');
+                menu.classList.remove('show');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('mainContent');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        });
+    </script>
+
+</body>
+</html>

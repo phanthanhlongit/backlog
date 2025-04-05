@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #3BB09E;
+            position: fixed;
+            padding-top: 1rem;
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+                .sidebar a:hover {
+                    background-color: #2E8B80;
+                }
+
+            .sidebar i {
+                margin-right: 10px;
+            }
+
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .badge-task {
+            background-color: #80C565;
+        }
+
+        .badge-request {
+            background-color: #F5B041;
+        }
+
+        .badge-open {
+            background-color: #E74C3C;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn">
+            <i class="bi bi-list"></i>
+        </button>
+        <a href="#"><i class="bi bi-house"></i> <span>Home</span></a>
+        <a href="#"><i class="bi bi-plus-square"></i> <span>Add Issue</span></a>
+        <a href="#"><i class="bi bi-list-task"></i> <span>Issues</span></a>
+        <a href="#"><i class="bi bi-bar-chart"></i> <span>Gantt Chart</span></a>
+        <a href="#"><i class="bi bi-folder"></i> <span>Files</span></a>
+        <a href="#"><i class="bi bi-journal"></i> <span>Wiki</span></a>
+        <a href="#"><i class="bi bi-gear"></i> <span>Settings</span></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Search & Filters -->
+        <div class="card p-3 mb-3">
+            <h5>Search Conditions</h5>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Status</label>
+                    <select class="form-select">
+                        <option>All</option>
+                        <option>Open</option>
+                        <option>In Progress</option>
+                        <option>Resolved</option>
+                        <option>Closed</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Category</label>
+                    <select class="form-select">
+                        <option>All</option>
+                        <option>UI</option>
+                        <option>Design</option>
+                        <option>Editorial</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Milestone</label>
+                    <select class="form-select">
+                        <option>All</option>
+                        <option>Lock Down Menus</option>
+                        <option>Look and Feel</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Assignee</label>
+                    <select class="form-select">
+                        <option>All</option>
+                        <option>Diane Nguyen</option>
+                        <option>Todd Chavez</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Keyword</label>
+                    <input type="text" class="form-control" placeholder="Enter keyword">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-success w-100">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issues Table -->
+        <div class="card">
+            <div class="card-header">Issues List</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Issue Type</th>
+                            <th>Subject</th>
+                            <th>Assignee</th>
+                            <th>Status</th>
+                            <th>Category</th>
+                            <th>Milestone</th>
+                            <th>Start Date</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-request">Request</span></td>
+                            <td>Create sample video content</td>
+                            <td><img src="https://via.placeholder.com/30" class="avatar"> Mr Peanut Butter</td>
+                            <td><span class="badge badge-open">Open</span></td>
+                            <td>Editorial, Video</td>
+                            <td>Sample editorial content</td>
+                            <td>Apr 15, 2019</td>
+                            <td>Apr 19, 2019</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-task">Task</span></td>
+                            <td>Design 4 sample mood boards</td>
+                            <td><img src="https://via.placeholder.com/30" class="avatar"> Diane Nguyen</td>
+                            <td><span class="badge badge-open">Open</span></td>
+                            <td>Design</td>
+                            <td>Lock Down Look and Feel</td>
+                            <td>Apr 15, 2019</td>
+                            <td>Apr 19, 2019</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("collapsed");
+            document.getElementById("content").classList.toggle("collapsed");
+        }
+    </script>
+</body>
+</html>
