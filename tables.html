@@ -177,12 +177,7 @@
             <div class="icon-group d-flex align-items-center">
                 <!-- Notifications Dropdown -->
                 <div class="dropdown">
-                    <i class="bi bi-bell dropdown-toggle" id="notificationDropdown" role="button" data-bs-toggle="dropdown"></i>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">New comment</a></li>
-                        <li><a class="dropdown-item" href="#">Task updated</a></li>
-                        <li><a class="dropdown-item" href="#">Reminder set</a></li>
-                    </ul>
+                    <i class="bi bi-bell" role="button" data-bs-toggle="offcanvas" data-bs-target="#notificationSidebar"></i>
                 </div>
 
                 <!-- User Dropdown -->
@@ -286,43 +281,73 @@
         <div class="card">
             <div class="card-header">Table list</div>
             <div class="card-body">
-                <table id="myTable" class="table table-striped">
+                <table id="myTable" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Issue Type</th>
-                            <th>Subject</th>
-                            <th>Assignee</th>
-                            <th>Status</th>
-                            <th>Category</th>
-                            <th>Milestone</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
+                            <th rowspan="2"><input type="checkbox" /></th>
+                            <th rowspan="2"></th> <!-- Dấu + -->
+                            <th colspan="2">Item Detail</th>
+                            <th rowspan="2">Item Operate</th>
+                            <th rowspan="2">Item ID</th>
+                        </tr>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Item Price</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="badge badge-request">Request</span></td>
-                            <td>Create sample video content</td>
-                            <td><img src="https://via.placeholder.com/30" class="avatar"> Mr Peanut Butter</td>
-                            <td><span class="badge badge-open">Open</span></td>
-                            <td>Editorial, Video</td>
-                            <td>Sample editorial content</td>
-                            <td>Apr 15, 2019</td>
-                            <td>Apr 19, 2019</td>
+                            <td><input type="checkbox" /></td>
+                            <td><a href="#">+</a></td>
+                            <td>Item 0</td>
+                            <td>$0</td>
+                            <td>
+                                <span style="color: blue;">💙</span>
+                                <span style="color: blue; cursor: pointer;">✖</span>
+                            </td>
+                            <td>0</td>
                         </tr>
                         <tr>
-                            <td><span class="badge badge-task">Task</span></td>
-                            <td>Design 4 sample mood boards</td>
-                            <td><img src="https://via.placeholder.com/30" class="avatar"> Diane Nguyen</td>
-                            <td><span class="badge badge-open">Open</span></td>
-                            <td>Design</td>
-                            <td>Lock Down Look and Feel</td>
-                            <td>Apr 15, 2019</td>
-                            <td>Apr 19, 2019</td>
+                            <td><input type="checkbox" /></td>
+                            <td><a href="#">+</a></td>
+                            <td>Item 1</td>
+                            <td>$1</td>
+                            <td>
+                                <span style="color: blue;">💙</span>
+                                <span style="color: blue; cursor: pointer;">✖</span>
+                            </td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td><a href="#">+</a></td>
+                            <td>Item 2</td>
+                            <td>$2</td>
+                            <td>
+                                <span style="color: blue;">💙</span>
+                                <span style="color: blue; cursor: pointer;">✖</span>
+                            </td>
+                            <td>2</td>
                         </tr>
                     </tbody>
                 </table>
+
             </div>
+        </div>
+    </div>
+
+    <!-- Right Sidebar Notifications -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="notificationSidebar" aria-labelledby="notificationSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="notificationSidebarLabel">Thông báo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-group">
+                <li class="list-group-item">📝 Bạn có bình luận mới</li>
+                <li class="list-group-item">🔔 Cập nhật trạng thái task</li>
+                <li class="list-group-item">⏰ Nhắc nhở công việc</li>
+            </ul>
         </div>
     </div>
 
@@ -338,14 +363,11 @@
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable({
-                responsive: true,
-                paging: true,
-                searching: true,
-                ordering: true
+                paging: false,
+                info: false
             });
         });
     </script>
-
     <!-- Toggle Script -->
     <script>
         document.querySelectorAll('.nav-item.dropdown').forEach(item => {
