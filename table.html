@@ -1,185 +1,203 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Management Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Resizable Table with Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            table-layout: fixed;
         }
 
-        .sidebar {
-            height: 100vh;
-            width: 250px;
-            background-color: #3BB09E;
-            position: fixed;
-            padding-top: 1rem;
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            position: relative;
         }
 
-            .sidebar a {
-                color: white;
-                padding: 10px 20px;
+        th {
+            background-color: #f4f6f8;
+            color: #333;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+            /* Resizer */
+            th .resizer {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 8px;
+                height: 100%;
+                cursor: col-resize;
                 display: flex;
                 align-items: center;
-                text-decoration: none;
+                justify-content: center;
+                color: #aaa;
+                font-size: 14px;
+                user-select: none;
             }
 
-                .sidebar a:hover {
-                    background-color: #2E8B80;
+                th .resizer:hover {
+                    color: #000;
                 }
 
-            .sidebar i {
-                margin-right: 10px;
+
+
+        tbody tr:nth-child(odd) {
+            background-color: #fff0f5;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fff;
+        }
+
+        .tag {
+            padding: 3px 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 12px;
+        }
+
+            .tag.request {
+                background: #f4b400;
             }
 
-        .content {
-            margin-left: 260px;
-            padding: 20px;
+            .tag.task {
+                background: #34a853;
+            }
+
+        .status {
+            background: #f28b82;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
         }
 
-        .badge-task {
-            background-color: #80C565;
-        }
-
-        .badge-request {
-            background-color: #F5B041;
-        }
-
-        .badge-open {
-            background-color: #E74C3C;
-        }
-
-        .avatar {
-            width: 30px;
-            height: 30px;
+        .avatar img {
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            object-fit: cover;
+            margin-right: 5px;
+        }
+
+        .search-input {
+            width: 300px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
-<body>
+<body class="p-4 bg-light">
 
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <button class="toggle-btn">
-            <i class="bi bi-list"></i>
-        </button>
-        <a href="#"><i class="bi bi-house"></i> <span>Home</span></a>
-        <a href="#"><i class="bi bi-plus-square"></i> <span>Add Issue</span></a>
-        <a href="#"><i class="bi bi-list-task"></i> <span>Issues</span></a>
-        <a href="#"><i class="bi bi-bar-chart"></i> <span>Gantt Chart</span></a>
-        <a href="#"><i class="bi bi-folder"></i> <span>Files</span></a>
-        <a href="#"><i class="bi bi-journal"></i> <span>Wiki</span></a>
-        <a href="#"><i class="bi bi-gear"></i> <span>Settings</span></a>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-
-        <!-- Search & Filters -->
-        <div class="card p-3 mb-3">
-            <h5>Search Conditions</h5>
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Status</label>
-                    <select class="form-select">
-                        <option>All</option>
-                        <option>Open</option>
-                        <option>In Progress</option>
-                        <option>Resolved</option>
-                        <option>Closed</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label>Category</label>
-                    <select class="form-select">
-                        <option>All</option>
-                        <option>UI</option>
-                        <option>Design</option>
-                        <option>Editorial</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label>Milestone</label>
-                    <select class="form-select">
-                        <option>All</option>
-                        <option>Lock Down Menus</option>
-                        <option>Look and Feel</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label>Assignee</label>
-                    <select class="form-select">
-                        <option>All</option>
-                        <option>Diane Nguyen</option>
-                        <option>Todd Chavez</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label>Keyword</label>
-                    <input type="text" class="form-control" placeholder="Enter keyword">
-                </div>
-                <div class="col-md-2 d-flex align-items-end">
-                    <button class="btn btn-success w-100">Search</button>
-                </div>
+    <div class="container bg-white p-4 rounded shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Quản lý công việc</h5>
+            <div class="btn-group">
+                <button class="btn btn-primary btn-sm">Thêm mới</button>
+                <button class="btn btn-success btn-sm">Xuất Excel</button>
             </div>
         </div>
 
-        <!-- Issues Table -->
-        <div class="card">
-            <div class="card-header">Issues List</div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Issue Type</th>
-                            <th>Subject</th>
-                            <th>Assignee</th>
-                            <th>Status</th>
-                            <th>Category</th>
-                            <th>Milestone</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="badge badge-request">Request</span></td>
-                            <td>Create sample video content</td>
-                            <td><img src="https://via.placeholder.com/30" class="avatar"> Mr Peanut Butter</td>
-                            <td><span class="badge badge-open">Open</span></td>
-                            <td>Editorial, Video</td>
-                            <td>Sample editorial content</td>
-                            <td>Apr 15, 2019</td>
-                            <td>Apr 19, 2019</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge badge-task">Task</span></td>
-                            <td>Design 4 sample mood boards</td>
-                            <td><img src="https://via.placeholder.com/30" class="avatar"> Diane Nguyen</td>
-                            <td><span class="badge badge-open">Open</span></td>
-                            <td>Design</td>
-                            <td>Lock Down Look and Feel</td>
-                            <td>Apr 15, 2019</td>
-                            <td>Apr 19, 2019</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <input type="text" class="form-control search-input" id="searchInput" placeholder="Tìm kiếm..." />
 
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle" id="resizable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Issue Type<div class="resizer">⋮</div></th>
+                        <th>Subject<div class="resizer">⋮</div></th>
+                        <th>Assignee<div class="resizer">⋮</div></th>
+                        <th>Status<div class="resizer">⋮</div></th>
+                        <th>Category<div class="resizer">⋮</div></th>
+                        <th>Start Date<div class="resizer">⋮</div></th>
+                        <th>Due Date<div class="resizer">⋮</div></th>
+                        <th>Action<div class="resizer">⋮</div></th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable">
+                    <tr>
+                        <td><span class="tag request">Request</span></td>
+                        <td>Create video content</td>
+                        <td><div class="d-flex align-items-center"><img src="https://i.pravatar.cc/28?img=1"> Mr PB</div></td>
+                        <td><span class="status">Open</span></td>
+                        <td>Editorial</td>
+                        <td>Apr. 15, 2019</td>
+                        <td>Apr. 19, 2019</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">Sửa</button>
+                            <button class="btn btn-sm btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag task">Task</span></td>
+                        <td>Design mood board</td>
+                        <td><div class="d-flex align-items-center"><img src="https://i.pravatar.cc/28?img=2"> Diane</div></td>
+                        <td><span class="status">Open</span></td>
+                        <td>Design</td>
+                        <td>Apr. 15, 2019</td>
+                        <td>Apr. 19, 2019</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">Sửa</button>
+                            <button class="btn btn-sm btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("collapsed");
-            document.getElementById("content").classList.toggle("collapsed");
-        }
+        // Resizing
+        const cols = document.querySelectorAll("th");
+        let currentResizer;
+
+        cols.forEach((col) => {
+            const resizer = col.querySelector(".resizer");
+            resizer.addEventListener("mousedown", function (e) {
+                currentResizer = {
+                    col,
+                    startX: e.pageX,
+                    startWidth: col.offsetWidth
+                };
+                document.addEventListener("mousemove", resize);
+                document.addEventListener("mouseup", stopResize);
+            });
+
+            function resize(e) {
+                if (!currentResizer) return;
+                const dx = e.pageX - currentResizer.startX;
+                currentResizer.col.style.width = currentResizer.startWidth + dx + "px";
+            }
+
+            function stopResize() {
+                document.removeEventListener("mousemove", resize);
+                document.removeEventListener("mouseup", stopResize);
+                currentResizer = null;
+            }
+        });
+
+        // Filter
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("keyup", function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#dataTable tr");
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
     </script>
+
 </body>
 </html>
